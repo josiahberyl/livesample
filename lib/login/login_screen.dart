@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_svg/svg.dart';
 import 'package:intl_phone_field/intl_phone_field.dart';
 import 'otp_screen.dart'; // Make sure this file exists
 
@@ -11,8 +12,11 @@ class LoginScreen extends StatefulWidget {
 
 class _LoginScreenState extends State<LoginScreen> {
   final TextEditingController _phoneController = TextEditingController();
-  String _completePhoneNumber = '';
+  String _countryCode = '+91';
+  String _mobileNumber = '';
   bool _acceptedTerms = false;
+
+  String get _completePhoneNumber => '$_countryCode$_mobileNumber';
 
   @override
   Widget build(BuildContext context) {
@@ -57,42 +61,84 @@ class _LoginScreenState extends State<LoginScreen> {
                 ),
                 const SizedBox(height: 16),
 
-                // Phone number input with country code picker
-                IntlPhoneField(
-                  controller: _phoneController,
-                  decoration: InputDecoration(
-                    hintText: 'Enter mobile number',
-                    filled: true,
-                    fillColor: Colors.white,
-                    border: OutlineInputBorder(
-                      borderSide: BorderSide(color: Colors.orange),
-                      borderRadius: BorderRadius.circular(8),
+                // Row with IntlPhoneField and phone number
+                Row(
+                  children: [
+                    SizedBox(
+                      width: 110,
+                      child: IntlPhoneField(
+                        showDropdownIcon: true,
+                        showCountryFlag: true,
+                        showCursor: false,
+                        disableLengthCheck: true,
+                        dropdownTextStyle: const TextStyle(fontSize: 16),
+                        decoration: InputDecoration(
+                          filled: true,
+                          fillColor: Colors.white,
+                          contentPadding: const EdgeInsets.symmetric(horizontal: 10),
+                          border: OutlineInputBorder(
+                            borderSide: BorderSide(color: Colors.orange),
+                            borderRadius: BorderRadius.circular(8),
+                          ),
+                          enabledBorder: OutlineInputBorder(
+                            borderSide: BorderSide(color: Colors.orange),
+                            borderRadius: BorderRadius.circular(8),
+                          ),
+                          counterText: "", // removes 0/10
+                        ),
+                        initialCountryCode: 'IN',
+                        onChanged: (phone) {
+                          setState(() {
+                            _countryCode = phone.countryCode;
+                          });
+                        },
+                      ),
                     ),
-                    enabledBorder: OutlineInputBorder(
-                      borderSide: BorderSide(color: Colors.orange),
-                      borderRadius: BorderRadius.circular(8),
+                    const SizedBox(width: 8),
+                    Expanded(
+                      child: TextField(
+                        keyboardType: TextInputType.phone,
+                        decoration: InputDecoration(
+                          hintText: 'Enter mobile number',
+                          filled: true,
+                          fillColor: Colors.white,
+                          contentPadding: const EdgeInsets.symmetric(horizontal: 12),
+                          border: OutlineInputBorder(
+                            borderSide: BorderSide(color: Colors.orange),
+                            borderRadius: BorderRadius.circular(8),
+                          ),
+                          enabledBorder: OutlineInputBorder(
+                            borderSide: BorderSide(color: Colors.orange),
+                            borderRadius: BorderRadius.circular(8),
+                          ),
+                        ),
+                        onChanged: (value) {
+                          setState(() {
+                            _mobileNumber = value;
+                          });
+                        },
+                      ),
                     ),
-                  ),
-                  initialCountryCode: 'IN',
-                  onChanged: (phone) {
-                    setState(() {
-                      _completePhoneNumber = phone.completeNumber;
-                    });
-                  },
+                  ],
                 ),
 
                 const SizedBox(height: 4),
+
+                // Safe info with icon on same line
                 Row(
                   children: const [
-                    Icon(Icons.verified_user, color: Colors.orange, size: 18),
-                    SizedBox(width: 6),
                     Text(
                       'Don’t worry your details are safe with us.',
                       style: TextStyle(fontSize: 13),
                     ),
+                    SizedBox(width: 6),
+                    Icon(Icons.verified_user, color: Colors.orange, size: 18),
                   ],
                 ),
+
                 const SizedBox(height: 16),
+
+                // Terms and conditions
                 Row(
                   children: [
                     Checkbox(
@@ -120,7 +166,10 @@ class _LoginScreenState extends State<LoginScreen> {
                     const Text(' of Aura.'),
                   ],
                 ),
+
                 const Spacer(),
+
+                // Send OTP button
                 SizedBox(
                   width: double.infinity,
                   height: 48,
@@ -131,7 +180,9 @@ class _LoginScreenState extends State<LoginScreen> {
                         borderRadius: BorderRadius.circular(8),
                       ),
                     ),
-                    onPressed: _acceptedTerms && _completePhoneNumber.isNotEmpty
+                    onPressed: _acceptedTerms &&
+                            _mobileNumber.isNotEmpty &&
+                            _countryCode.isNotEmpty
                         ? () {
                             Navigator.push(
                               context,
@@ -149,6 +200,7 @@ class _LoginScreenState extends State<LoginScreen> {
                     ),
                   ),
                 ),
+
                 const SizedBox(height: 30),
               ],
             ),

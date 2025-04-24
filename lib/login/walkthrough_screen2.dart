@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import '../login/walkthrough_screen3.dart';
+import 'package:flutter_svg/svg.dart';
 import '../login/login_screen.dart';
 
 class WalkthroughScreen2 extends StatelessWidget {
@@ -40,8 +41,8 @@ class WalkthroughScreen2 extends StatelessWidget {
                       textAlign: TextAlign.center,
                     ),
                     const SizedBox(height: 30),
-                    Image.asset(
-                      'assets/images/sale.png', 
+                    SvgPicture.asset(
+                      'assets/images/sale.svg', 
                       height: 220,
                     ),
                     const SizedBox(height: 30),

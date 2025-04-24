@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_svg/flutter_svg.dart';
 import '../login/walkthrough_screen2.dart';
 import '../login/login_screen.dart'; // Update the path if needed
 
@@ -40,9 +41,9 @@ class Walkthrough1 extends StatelessWidget {
                       textAlign: TextAlign.center,
                     ),
                     const SizedBox(height: 30),
-                    Image.asset(
-                      'assets/images/hello_image.png',
-                      height: 140,
+                    SvgPicture.asset(
+                      'assets/images/hello_image.svg',
+                      
                     ),
                     const SizedBox(height: 16),
                     const Text(
@@ -54,9 +55,9 @@ class Walkthrough1 extends StatelessWidget {
                       textAlign: TextAlign.center,
                     ),
                     const SizedBox(height: 30),
-                    Image.asset(
-                      'assets/images/delivery_image.png',
-                      height: 180,
+                    SvgPicture.asset(
+                      'assets/images/delivery_image.svg',
+                      
                     ),
                     const SizedBox(height: 30),
                     const Text.rich(
