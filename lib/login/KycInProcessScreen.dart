@@ -22,7 +22,7 @@ class KYCInProcessScreen extends StatelessWidget {
             children: [
               const SizedBox(height: 24),
               Image.asset(
-                'assets/images/logo.',
+                'assets/images/logo.png',
                 height: 100,
               ),
               const SizedBox(height: 50),
