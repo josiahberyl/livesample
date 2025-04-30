@@ -168,7 +168,7 @@ class _OtpScreenState extends State<OtpScreen> {
                   Navigator.push(
                     context,
                     MaterialPageRoute(
-                      builder: (context) => const KycVerificationScreen(),
+                      builder: (context) => KycVerificationScreen()
                     ),
                   );
                 },

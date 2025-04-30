@@ -12,6 +12,12 @@ dependencies:
   flutter_svg: ^2.1.0
   intl_phone_field: ^3.2.0
   lottie: ^2.2.0
+  image_picker: ^1.0.4
+  font_awesome_flutter: ^10.6.0
+  geolocator: ^14.0.0
+  geocoding: ^3.0.0
+
+
 
 dev_dependencies:
   flutter_test:

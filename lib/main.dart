@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:kisangro/home/home_screen.dart';
 import 'package:kisangro/login/splash_screen.dart';
 
 
@@ -19,7 +20,7 @@ class MyApp extends StatelessWidget {
         fontFamily: 'Roboto',
         colorScheme: ColorScheme.fromSeed(seedColor: const Color(0xFF26A450)),
       ),
-      home: const SplashScreen(),
+      home: const HomeScreen(),
     );
   }
 }

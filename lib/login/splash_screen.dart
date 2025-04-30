@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_svg/svg.dart';
-import 'dart:async'; // for Timer
-import 'walkthrough1.dart';
+import 'dart:async'; 
+import 'WalkthroughScreen.dart';
 
 class SplashScreen extends StatefulWidget {
   const SplashScreen({super.key});
@@ -16,7 +16,7 @@ class _SplashScreenState extends State<SplashScreen> {
     super.initState();
     Timer(const Duration(seconds: 3), () {
       Navigator.of(context).pushReplacement(
-        MaterialPageRoute(builder: (context) => const Walkthrough1()),
+        MaterialPageRoute(builder: (context) => const WalkthroughScreen()),
       );
     });
   }
